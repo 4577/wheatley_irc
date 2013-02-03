@@ -48,9 +48,12 @@ class Bot(irc.IRCClient):
 
 	def removeOldSessions(self):
 		self.sessLock.acquire(True)
-		for nick in self.sessions:
-			if self.sessions[nick].lastTs < time.time()-(60*10):
-				del self.sessions[nick]
+		try:
+			for nick in self.sessions:
+				if self.sessions[nick].lastTs < time.time()-(60*10):
+					del self.sessions[nick]
+		except RuntimeError:
+			pass;
 		self.sessLock.release()
 	
 	def handleMessage(self, user, msg):
