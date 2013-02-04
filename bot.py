@@ -60,10 +60,10 @@ class Bot(irc.IRCClient):
 		self.removeOldSessions()
 		msg = msg.strip()
 		self.sessLock.acquire(True)
-		if msg == "[delete sess]":
-			if user in self.sessions:
-				del self.sessions[user]
-			return
+#		if msg == "[delete sess]":
+#			if user in self.sessions:
+#				del self.sessions[user]
+#			return
 		if user not in self.sessions:
 			self.sessions[user] = cleverbot.Session()
 		reply = self.sessions[user].Ask(msg)
