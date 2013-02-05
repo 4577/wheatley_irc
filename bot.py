@@ -1,3 +1,5 @@
+#!/usr/bin/python
+#-*- encoding: utf-8 -*-
 from twisted.words.protocols import irc
 from twisted.internet import reactor, protocol
 from twisted.python import log
@@ -66,7 +68,7 @@ class Bot(irc.IRCClient):
 #			return
 		if user not in self.sessions:
 			self.sessions[user] = cleverbot.Session()
-		reply = self.sessions[user].Ask(msg)
+		reply = self.sessions[user].ask(msg)
 		self.sessLock.release()
 		self.say(self.channel, user+": "+reply)
 
